@@ -617,6 +617,7 @@ class ModalDialog extends HTMLElement {
     }
 
     connectedCallback() {
+        if (this.closest('featured-lookbook')) return;
         if (this.moved) return;
         this.moved = true;
         document.body.appendChild(this);

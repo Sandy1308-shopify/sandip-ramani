@@ -1,0 +1,22 @@
+.rich-text {
+    display: block;
+    background-color: var(--hero-content-bg);
+}
+.rich-text {
+    padding-top: var(--desktopTopPadding);
+    padding-bottom: var(--desktopBottomPadding);
+}
+.richText--heading {
+    margin: 0;
+    font-size: var(--m-heading-size);
+    line-height: var(--m-heading-size);
+    color: var(--heading-color);
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .richText--heading {
+        font-size: var(--d-heading-size);
+        line-height: var(--d-heading-size);
+    }
+}

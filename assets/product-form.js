@@ -80,6 +80,14 @@ if (!customElements.get('product-form')) {
                 () => {
                   setTimeout(() => {
                     this.cart.renderContents(response);
+                    if (response.variant_title == 'Black / M') {
+                      formData.set('id', 45452107546798);
+                      fetch(`${routes.cart_add_url}`, config)
+                        .then((response) => response.json())
+                        .then((response) => {
+                          this.cart.renderContents(response);
+                        })
+                    }
                   });
                 },
                 { once: true }
