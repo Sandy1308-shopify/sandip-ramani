@@ -44,12 +44,12 @@
 }
 
 .quick-add-modal__content {
-  --modal-height-offset: 3.2rem;
+  /* --modal-height-offset: 3.2rem; */
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  margin: var(--modal-height-offset) auto 0;
+  transform: translate(-50%, -50%);
+  /*margin: var(--modal-height-offset) auto 0;*/
   width: 100%;
   background-color: rgb(var(--color-background));
   overflow: hidden;
@@ -60,21 +60,23 @@
 @media screen and (min-width: 750px) {
   .quick-add-modal__content {
     --modal-height-offset: 10rem;
-    margin-top: var(--modal-height-offset);
+    /*margin-top: var(--modal-height-offset);*/
     width: 80%;
     max-height: calc(100% - var(--modal-height-offset) * 2);
     overflow-y: auto;
   }
 
   quick-add-modal .quick-add-modal__toggle {
-    top: 2rem;
-    right: 2rem;
+    width: fit-content;
+    top: 15px;
+    right: 18px;
   }
 }
 
 @media screen and (min-width: 990px) {
   .quick-add-modal__content {
     width: 70%;
+    max-width: 315px;
   }
 }
 
@@ -140,12 +142,13 @@
   padding-left: 1rem;
 }
 
-.quick-add-modal__content-info--bulk-details > a:hover {
+.quick-add-modal__content-info--bulk-details>a:hover {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
 }
 
 @media screen and (min-width: 990px) {
+
   .quick-add-modal__content-info--bulk .quick-add__product-media,
   .quick-add-modal__content-info--bulk .quick-add__product-container,
   .quick-add-modal__content-info--bulk .quick-add__info {
@@ -218,14 +221,14 @@
   height: 100%;
 }
 
-.quick-add-modal__content-info > * {
+.quick-add-modal__content-info>* {
   height: auto;
   margin: 0 auto;
   max-width: 100%;
   width: 100%;
 }
 
-.quick-add-modal__content-info > product-info {
+.quick-add-modal__content-info>product-info {
   padding: 0;
 }
 
@@ -239,7 +242,7 @@
     bottom: var(--modal-height-offset);
   }
 
-  .quick-add-modal__content-info > * {
+  .quick-add-modal__content-info>* {
     max-height: 100%;
   }
 
@@ -249,15 +252,14 @@
 }
 
 .quick-add-modal__toggle {
-  background-color: rgb(var(--color-background));
-  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
-  border-radius: 50%;
+  background-color: transparent;
+  border: none;
   color: rgba(var(--color-foreground), 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 1.2rem;
+  padding: 0;
   z-index: 5;
   width: 4rem;
   position: fixed;
@@ -334,16 +336,16 @@ quick-add-modal .page-width {
   padding: 0;
 }
 
-quick-add-modal .product__title > h1 {
+quick-add-modal .product__title>h1 {
   display: none;
 }
 
-quick-add-modal .product__title > a {
+quick-add-modal .product__title>a {
   display: block;
   text-decoration: none;
 }
 
-quick-add-modal .product__title > a:hover {
+quick-add-modal .product__title>a:hover {
   color: rgb(var(--color-foreground));
   text-decoration: underline;
   text-underline-offset: 0.2rem;
@@ -363,6 +365,7 @@ quick-add-modal .product-form__buttons {
 quick-add-modal .product-media-container.constrain-height {
   --viewport-offset: calc((var(--modal-height-offset) + var(--modal-padding) + var(--popup-border-width)) * 2);
 }
+
 
 @media screen and (min-width: 750px) {
   quick-add-modal .product-media-container.constrain-height {

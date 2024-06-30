@@ -4,8 +4,16 @@
   Usage:
   {% render 'header-dropdown-menu' %}
 {% endcomment %}
-
-<nav class="header__inline-menu">
+{% if section.settings.show_text %}
+  <div class="header-text-content desktop-text">
+    {%- if section.settings.text != blank -%}
+      <p class="header_text">
+        <span>{{ section.settings.text | escape }}</span>
+      </p>
+    {% endif %}
+  </div>
+{% else %}
+  <nav class="header__inline-menu 123">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
       <li>
@@ -101,3 +109,4 @@
     {%- endfor -%}
   </ul>
 </nav>
+{% endif %}

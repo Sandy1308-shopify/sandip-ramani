@@ -1,1 +1,40 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-bar-0":{"type":"announcement","settings":{"text":"Welcome to our store","link":""}}},"block_order":["announcement-bar-0"],"settings":{"color_scheme":"scheme-1","show_line_separator":true,"show_social":false,"auto_rotate":false,"change_slides_speed":5,"enable_country_selector":false,"enable_language_selector":false}},"header":{"type":"header","settings":{"logo_position":"middle-left","menu":"main-menu","menu_type_desktop":"dropdown","sticky_header_type":"on-scroll-up","show_line_separator":true,"color_scheme":"scheme-1","menu_color_scheme":"scheme-1","enable_country_selector":true,"enable_language_selector":true,"enable_customer_avatar":true,"mobile_logo_position":"center","margin_bottom":0,"padding_top":20,"padding_bottom":20}}},"order":["announcement-bar","header"]}
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "show_button": true,
+        "button_label": "choose gift",
+        "header_gift_ctabg": "#FFF544",
+        "header_gift_ctacolor": "#000000",
+        "hover_gift_ctabg": "#000000",
+        "hover_gift_ctacolor": "#ffffff",
+        "arrow_color": "#000000",
+        "hover_arrow_color": "#ffffff",
+        "link": "",
+        "show_text": true,
+        "text": "Find the ideal gift for your loved ones.",
+        "header_txt_color": "#000000",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 10,
+        "padding_bottom": 10
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}
