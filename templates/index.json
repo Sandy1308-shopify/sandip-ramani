@@ -1,72 +1,40 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "The Gift Guide",
-            "heading_size": "h0"
-          }
-        },
-        "text_VLBB63": {
-          "type": "text",
-          "settings": {
-            "text": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
-            "text_md": "Discover Joy: Your Ultimate Holiday Gift Destination.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop Now",
-            "button_link_1": "#",
-            "button_style_secondary_1": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text_VLBB63",
-        "button"
-      ],
+    "hero_JeH7hG": {
+      "type": "hero",
       "settings": {
-        "image_overlay_opacity": 0,
-        "image_height": "large",
+        "image": "shopify:\/\/shop_images\/Group_1000008198.svg",
+        "m_image": "shopify:\/\/shop_images\/Frame_1958.svg",
+        "heading": "The Gift Guide",
+        "content": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "mobile_content": "Discover Joy: Your Ultimate Holiday Gift Destination.",
+        "button_label": "Shop Now",
+        "button_link": "#",
         "desktop_content_position": "bottom-left",
-        "show_text_box": true,
-        "desktop_content_alignment": "left",
-        "color_scheme": "scheme-2",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "text_aligment": "left",
+        "content_bg_color": "rgba(0,0,0,0)",
+        "d_heading_size": 70,
+        "m_heading_size": 30,
+        "heading_color": "#000000",
+        "d_text_size": 20,
+        "m_text_size": 16,
+        "text_color": "#000000",
+        "background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_bg_hover_color": "#fff544",
+        "button_text_hover_color": "#000000"
       }
     },
-    "rich_text_qh6Uii": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_Yi8ALz": {
-          "type": "heading",
-          "settings": {
-            "heading": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL",
-            "text_md": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
-            "heading_size": "h2"
-          }
-        }
-      },
-      "block_order": [
-        "heading_Yi8ALz"
-      ],
+    "rich_banner_text_t3w8zP": {
+      "type": "rich-banner-text",
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "",
-        "full_width": true,
-        "padding_top": 8,
-        "padding_bottom": 8
+        "heading": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL",
+        "mobile_heading": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
+        "content_bg_color": "#f5f5f5",
+        "d_heading_size": 16,
+        "m_heading_size": 14,
+        "padding_top": 10,
+        "padding_bottom": 10
       }
     },
     "featured_look_book_mT8hiy": {
@@ -161,8 +129,8 @@
     }
   },
   "order": [
-    "image_banner",
-    "rich_text_qh6Uii",
+    "hero_JeH7hG",
+    "rich_banner_text_t3w8zP",
     "featured_look_book_mT8hiy"
   ]
 }
