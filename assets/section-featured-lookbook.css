@@ -327,6 +327,11 @@ quick-add-modal .product-media-container.constrain-height .media {
     right: 0;
     top: 10px;
 }
+
+quick-add-modal product-modal .product-media-modal__dialog {
+    height: 100%;
+}
+
 @media screen and (min-width: 992px) {
     featured-lookbook {
         padding-top: 90px;
