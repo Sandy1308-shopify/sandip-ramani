@@ -1,0 +1,268 @@
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+{{ 'section-featured-lookbook.css' | asset_url | stylesheet_tag }}
+{% assign section_id = section.id %}
+<featured-lookbook data-section-id="{{ section.id }}">
+    <div class="container">
+        {% if section.settings.heading != blank %}        
+            <div class="featured-lookbook__title">
+                <h2>{{ section.settings.heading }}</h2>
+            </div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+        <featured-lookbook-items class="grid lookbook-grid grid--3-col-desktop grid--2-col-tablet-down">
+            {%- for block in section.blocks -%}
+                {% liquid
+                    assign product = block.settings.product
+                    assign image_height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio
+                    assign stacked_sizes = '(min-width: 750px) 60vw, 120vw'
+                    assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                    assign fetch_priority = 'auto'
+                    
+                    # Focal settings
+                    assign desktopFocalLeft = block.settings.d_focal_left
+                    assign desktopFocalTop = block.settings.d_focal_top
+                    assign mobileFocalLeft = block.settings.m_focal_left
+                    assign mobileFocalTop = block.settings.m_focal_top
+                %}
+                {% if product != blank %}
+                    <div class="lookbookItem grid__item lookbookItem--{{ block.id }}">
+                        <div class="lookbookItem__info">
+                            <div class="lookbookItem__image d-image-{{ section.settings.image_height }} m-image-{{ section.settings.md_image_height }}">
+                                {% if block.settings.image != blank %}
+                                    {{
+                                        block.settings.image
+                                        | image_url: width: 3840
+                                        | image_tag:
+                                        width: block.settings.image.width,
+                                        height: image_height,
+                                        class: 'img-contain',
+                                        sizes: stacked_sizes,
+                                        widths: widths,
+                                        fetchpriority: fetch_priority
+                                    }}
+                                {% else %}
+                                    {{
+                                        product.featured_image.src
+                                        | image_url: width: 3840
+                                        | image_tag:
+                                        width: product.featured_image.src.width,
+                                        height: image_height,
+                                        class: 'img-contain',
+                                        sizes: stacked_sizes,
+                                        widths: widths,
+                                        fetchpriority: fetch_priority
+                                    }}
+                                {% endif %}                        
+                            </div>
+                            {%- style -%} 
+                                .focalPoint--{{ block.id }} {
+                                    left: {{ block.settings.d_focal_left }}%;
+                                    top: {{ block.settings.d_focal_top }}%;
+                                }
+                                @media screen and (max-width: 767px) {
+                                    .focalPoint--{{ block.id }} {
+                                        left: {{ block.settings.m_focal_left }}%;
+                                        top: {{ block.settings.m_focal_top }}%;
+                                    }
+                                }
+                            {%- endstyle -%}
+                            {% assign product_form_id = 'quick-add-' | append: section_id | append: product.id %}
+                            <div class="lookbookItem__focal focalPoint--{{ block.id }} no-js-hidden quick-add">
+                                <modal-opener data-modal="#QuickAdd-{{ product.id }}">
+                                    <button
+                                    id="{{ product_form_id }}-submit"
+                                    type="submit"
+                                    name="add"
+                                    class="quick-add__submit button button--full-width button--secondary"
+                                    aria-haspopup="dialog"
+                                    aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+                                    data-product-url="{{ product.url }}?view=quick"
+                                    >
+                                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.3457 1.04175V9.50329" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                        <path d="M1.11523 5.27246H9.57677" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                    </svg>
+                                    {%- render 'loading-spinner' -%}
+                                    </button>
+                                </modal-opener>
+                                <quick-add-modal id="QuickAdd-{{ product.id }}" class="quick-add-modal">
+                                    <div
+                                        role="dialog"
+                                        aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}"
+                                        aria-modal="true"
+                                        class="quick-add-modal__content global-settings-popup"
+                                        tabindex="-1">
+                                        <button
+                                            id="ModalClose-{{ product.id }}"
+                                            type="button"
+                                            class="quick-add-modal__toggle"
+                                            aria-label="{{ 'accessibility.close' | t }}"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M5.03784 4.94354L13.5231 13.4288" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                                <path d="M5.03784 13.4285L13.5231 4.94325" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+                                            </svg>
+                                        </button>
+                                        <div id="QuickAddInfo-{{ product.id }}" class="quick-add-modal__content-info"></div>
+                                    </div>
+                                </quick-add-modal>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+            {%- endfor -%}
+        </featured-lookbook-items>
+        {% endif %}
+    </div>
+</featured-lookbook>
+<script src="{{ 'featured-lookbook.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+
+{% schema %}
+  {
+    "name": "Featured look book",
+    "tag": "section",
+    "class": "section section-featured-lookbook",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+        {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "select",
+            "id": "image_height",
+            "options": [
+                {
+                    "value": "adapt",
+                    "label": "Adapt"
+                },
+                {
+                    "value": "square",
+                    "label": "Square"
+                },
+                {
+                    "value": "large",
+                    "label": "large"
+                }
+            ],
+            "default": "square",
+            "label": "Desktop image height"
+        },
+        {
+            "type": "select",
+            "id": "md_image_height",
+            "options": [
+                {
+                    "value": "adapt",
+                    "label": "Adapt"
+                },
+                {
+                    "value": "square",
+                    "label": "Square"
+                },
+                {
+                    "value": "large",
+                    "label": "large"
+                }
+            ],
+            "default": "large",
+            "label": "Mobile image height"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "heading",
+            "name": "Product",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Select Product"
+                },                
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },          
+                
+                {
+                    "type": "paragraph",
+                    "content": "Desktop focal point"
+                },      
+                {
+                    "type": "range",
+                    "id": "d_focal_left",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "%",
+                    "label": "Focal left",
+                    "default": 36
+                },
+                {
+                    "type": "range",
+                    "id": "d_focal_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "%",
+                    "label": "Focal top",
+                    "default": 36
+                },
+                {
+                    "type": "paragraph",
+                    "content": "Mobile focal point"
+                },      
+                {
+                    "type": "range",
+                    "id": "m_focal_left",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "%",
+                    "label": "Focal left",
+                    "default": 36
+                },
+                {
+                    "type": "range",
+                    "id": "m_focal_top",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "%",
+                    "label": "Focal top",
+                    "default": 36
+                },
+                {
+                    "type": "select",
+                    "id": "picker_type",
+                    "options": [
+                        {
+                            "value": "dropdown",
+                            "label": "Dropdown"
+                        },
+                        {
+                            "value": "button",
+                            "label": "button"
+                        }
+                    ],
+                    "default": "button",
+                    "label": "Pills"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "name": "Featured look book"
+      }
+    ]
+  }
+{% endschema %}

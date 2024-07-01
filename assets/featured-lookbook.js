@@ -9,7 +9,10 @@ if (!customElements.get('quick-add-modal')) {
                 this.addEventListener('product-info:loaded', ({ target }) => {
                     target.addPreProcessCallback(this.preprocessHTML.bind(this));
                 });
+
+                this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
             }
+
 
             hide(preventFocus = false) {
                 const cartNotification = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
@@ -54,8 +57,6 @@ if (!customElements.get('quick-add-modal')) {
                         this.modalContent.classList.add(classApplied);
                 });
                 this.preventDuplicatedIDs(productElement);
-                this.removeDOMElements(productElement);
-                this.removeGalleryListSemantic(productElement);
                 this.updateImageSizes(productElement);
                 this.preventVariantURLSwitching(productElement);
             }
@@ -63,18 +64,6 @@ if (!customElements.get('quick-add-modal')) {
             preventVariantURLSwitching(productElement) {
                 productElement.setAttribute('data-update-url', 'false');
             }
-
-            removeDOMElements(productElement) {
-                const pickupAvailability = productElement.querySelector('pickup-availability');
-                if (pickupAvailability) pickupAvailability.remove();
-
-                const productModal = productElement.querySelector('product-modal');
-                if (productModal) productModal.remove();
-
-                const modalDialog = productElement.querySelectorAll('modal-dialog');
-                if (modalDialog) modalDialog.forEach((modal) => modal.remove());
-            }
-
             preventDuplicatedIDs(productElement) {
                 const sectionId = productElement.dataset.section;
 
@@ -90,13 +79,6 @@ if (!customElements.get('quick-add-modal')) {
                 productElement.dataset.originalSection = sectionId;
             }
 
-            removeGalleryListSemantic(productElement) {
-                const galleryList = productElement.querySelector('[id^="Slider-Gallery"]');
-                if (!galleryList) return;
-
-                galleryList.setAttribute('role', 'presentation');
-                galleryList.querySelectorAll('[id^="Slide-"]').forEach((li) => li.setAttribute('role', 'presentation'));
-            }
 
             updateImageSizes(productElement) {
                 const product = productElement.querySelector('.product');

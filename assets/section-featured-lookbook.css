@@ -1,0 +1,429 @@
+featured-lookbook {
+    padding-top: 40px;
+    display: block;
+}
+featured-lookbook .container {
+    padding: 0 16px;
+}
+
+featured-lookbook .featured-lookbook__title {
+    margin-bottom: 20px;
+}
+
+featured-lookbook .featured-lookbook__title h2 {
+    font-family: "Lustria", serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: center;
+    margin: 0;
+}
+
+.img-contain {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.lookbookItem__info {
+    position: relative;
+}
+
+.lookbookItem__focal {
+    width: 22px;
+    height: 22px;
+    background-color: rgba(248, 248, 248, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+.lookbookItem__focal .quick-add__submit {
+    background-color: transparent;
+    border: 0 none;
+    padding: 0;
+    height: auto;
+    min-height: inherit;
+}
+
+.lookbookItem__focal .quick-add__submit::after,
+.lookbookItem__focal .quick-add__submit::before {
+    display: none;
+}
+
+/* lookbookItem__product style */
+.lookbookItem__product__inner {
+    padding: 36px 20px 25px;
+}
+
+.lookbookItem__product__Header {
+    display: flex;
+}
+
+.lookbookItem__modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.lookbookItem__product__inner {
+    max-width: 310px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px 2px 4px 0px #00000033;
+}
+
+.lookbookItem__close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.lookbookItem__modal.active {
+    display: block;
+}
+
+.lookbookItem__product__Imgblock {
+    margin-right: 10px;
+}
+
+quick-add-modal .product__media img {
+    width: auto !important;
+    max-width: 120px !important;
+    height: 140px !important;
+    object-fit: cover;
+    position: inherit !important;
+}
+
+quick-add-modal .product-media-container.constrain-height .media {
+    padding-top: 0;
+}
+
+quick-add-modal .product__media-wrapper {
+    max-width: 45%;
+    width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
+}
+
+quick-add-modal .product-media-container {
+    border: none;
+}
+
+quick-add-modal .product__title h2 {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 300;
+    margin: 0;
+}
+
+quick-add-modal .product__title {
+    margin: 0;
+    padding-bottom: 15px;
+}
+
+quick-add-modal .price__container .price__regular span {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    margin: 0;
+    padding-bottom: 8px;
+}
+
+quick-add-modal .product__description p {
+    font-size: 14px;
+    line-height: 15.4px;
+    letter-spacing: -0.01em;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+quick-add-modal .lookbookItem__product__Infoblock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+quick-add-modal legend.form__label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+}
+
+quick-add-modal variant-selects .option-Color {
+    display: flex;
+    margin-top: 10px;
+}
+
+quick-add-modal  variant-selects .option-Color label {
+    flex: 0 0 50%;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    text-align: left !important;
+    font-size: 18px !important;
+    letter-spacing: -0.02rem !important;
+    line-height: 18px !important;
+}
+
+quick-add-modal variant-selects .option-Color label .swatch-color__block {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    height: 100%;
+    width: 5px;
+    border-right: 0.5px solid #000000;
+}
+
+quick-add-modal .product__view-details {
+    display: none !important;
+}
+
+quick-add-modal .product__info-container .product-form,
+quick-add-modal .product__info-container>*+* {
+    margin: 0 !important;
+}
+
+quick-add-modal .quickview__top-block {
+    display: flex;
+    gap: 8px;
+}
+
+quick-add-modal .quick-add-modal__content-info {
+    padding: 36px 17px 25px 17px;
+}
+
+quick-add-modal .product-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+quick-add-modal .dropdownContainer {
+    width: 100%;
+    display: block;
+    border: 0.5px solid #000;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transition: all 300ms ease-out;
+    display: none;
+}
+
+quick-add-modal .dropdownContainer.active {
+    z-index: 9;
+    height: 95px;
+    overflow: auto;
+    display: block;
+}
+
+custom-dropdown {
+    position: relative;
+}
+custom-dropdown.open .size-variant_dropdown svg {
+    transition: all 300ms linear;
+    transform: rotate(0deg);
+}
+custom-dropdown.open .size-variant_dropdown svg {
+    transform: rotate(180deg);
+}
+quick-add-modal .size-variant_dropdown {
+    border: .5px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+quick-add-modal .size-variant_dropdown span {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: #000;
+    width: 85%;
+    padding: 5px 0 5px 13px;
+    border-right: 0.5px solid #000;
+}
+
+quick-add-modal .size-variant_dropdown svg {
+    width: 15%;
+}
+
+quick-add-modal .dropdownContainer label {
+    font-size: 16px !important;
+    font-weight: 400;
+    width: 100%;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+quick-add-modal .dropdownContainer label::before {
+    display: none;
+}
+
+quick-add-modal .product-form__input--pill input[type=radio]:checked+label {
+    background-color: #000;
+    color: rgb(var(--color-background));
+}
+
+quick-add-modal .product-form__input--pill input[type=radio]+label:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.button.product-form__submit:before,
+.button.product-form__submit:after {
+    display: none;
+}
+
+.button.product-form__submit span {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.48px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.button.product-form__submit svg {
+    margin-left: 28px;
+}
+
+.button.product-form__submit {
+    width: 100%;
+    padding: 10px 0px 10px 40px;
+    margin: 0 !important;
+}
+
+quick-add-modal .product-form__buttons {
+    margin-top: 50px;
+}
+
+.slider--mobile:after {
+    display: none;
+}
+
+.quick-add-modal__content {
+    width: 100%;
+    max-width: 315px;
+}
+quick-add-modal .product-media-container.constrain-height .media {
+    overflow: inherit !important;
+}
+.quick-add-modal__toggle {
+    right: 0;
+    top: 10px;
+}
+
+quick-add-modal product-modal .product-media-modal__dialog {
+    height: 100%;
+}
+
+@media screen and (min-width: 992px) {
+    featured-lookbook {
+        padding-top: 90px;
+    }
+    .d-image-square {
+        position: relative;
+        padding-bottom: 100%;
+        height: 0;
+    }
+
+    .d-image-square img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .d-image-large {
+        position: relative;
+        padding-bottom: 110%;
+        height: 0;
+    }
+
+    .d-image-large img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    featured-lookbook .container {
+        padding: 0 50px;
+    }
+
+    featured-lookbook .featured-lookbook__title {
+        margin-bottom: 30px;
+    }
+
+    featured-lookbook .featured-lookbook__title h2 {
+        font-size: 36px;
+        line-height: 43px;
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    featured-lookbook .container {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .m-image-square {
+        position: relative;
+        padding-bottom: 100%;
+        height: 0;
+    }
+
+    .m-image-square img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .m-image-large {
+        position: relative;
+        padding-bottom: 110%;
+        height: 0;
+    }
+
+    .m-image-large img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
