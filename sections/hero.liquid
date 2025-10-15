@@ -1,0 +1,314 @@
+{{ 'section-hero-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .hero_banner {
+        --hero-content-bg: {{ section.settings.content_bg_color }};
+        --d-heading-size: {{ section.settings.d_heading_size }}px;
+        --m-heading-size: {{ section.settings.m_heading_size }}px;
+        --heading-color: {{ section.settings.heading_color }};
+        --d-text-size: {{ section.settings.d_text_size }}px;
+        --m-text-size: {{ section.settings.m_text_size }}px;
+        --text-color: {{ section.settings.text_color }};
+        --button-bg-color: {{ section.settings.background_color }};
+        --button-text-color: {{ section.settings.button_text_color }};
+        --button-hover-bg-color: {{ section.settings.button_bg_hover_color }};
+        --button-hover-text-color: {{ section.settings.button_text_hover_color }};
+    }
+{%- endstyle -%}
+<hero-banner>
+    <div class="hero_banner">
+        {%  liquid 
+            assign desktopImage = section.settings.image
+            assign mobileImage = section.settings.m_image
+
+            assign image_class = 'd-block m-hidden hero_banner--image'
+            assign m_image_class = 'block d-hidden hero_banner--image'
+            if mobileImage == blank
+                assign mobileImage = section.settings.image
+            endif
+
+            assign image_height = desktopImage.width | divided_by: desktopImage.aspect_ratio
+            assign m_image_height = mobileImage.width | divided_by: mobileImage.aspect_ratio
+            assign stacked_sizes = '(min-width: 750px) 60vw, 120vw'
+            assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+            assign fetch_priority = 'auto'
+            
+
+            assign heading = section.settings.heading
+            assign text = section.settings.content
+            assign mText = section.settings.mobile_content
+            if mText == blank
+                assign mText = section.settings.content
+            endif
+            assign button_label = section.settings.button_label
+            assign button_link = section.settings.button_link
+        %}
+        {%- if desktopImage != blank -%}
+            {{
+                desktopImage
+                | image_url: width: 3840
+                | image_tag:
+                width: desktopImage.width,
+                height: image_height,
+                class: image_class,
+                sizes: stacked_sizes,
+                widths: widths,
+                fetchpriority: fetch_priority
+            }}
+            {{
+                mobileImage
+                | image_url: width: 3840
+                | image_tag:
+                width: mobileImage.width,
+                height: m_image_height,
+                class: m_image_class,
+                sizes: stacked_sizes,
+                widths: widths,
+                fetchpriority: fetch_priority
+            }}
+        {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        <div class="hero_banner--content d-content-{{ section.settings.desktop_content_position }} d-text-{{ section.settings.text_aligment }}">
+            {%- if heading != blank or text != blank -%}
+            <div class="banner-content ">
+                {%- if heading != blank -%}
+                    <h2 class="hero_banner--heading">{{- heading -}}</h2>
+                {%- endif -%}
+                {%- if text != blank -%}
+                    <div class="hero_banner--text m-hidden d-block">
+                        {{- text -}}
+                    </div>
+                    <div class="hero_banner--text block d-hidden">
+                        {{- mText -}}
+                    </div>
+                {%- endif -%}
+            </div>
+            {%- endif -%}
+            {%- if button_label != blank and button_link != blank -%}
+                <a href="{{- button_link -}}" class="hero_banner-button">
+                    {{- button_label -}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="13" viewBox="0 0 28 13" fill="none">
+                        <path d="M1.11108 5.74402L0.361084 5.74402L0.361084 7.24402L1.11108 7.24402L1.11108 5.74402ZM27.1487 7.02435C27.4416 6.73146 27.4416 6.25658 27.1487 5.96369L22.3757 1.19072C22.0828 0.897826 21.6079 0.897826 21.315 1.19072C21.0221 1.48361 21.0221 1.95849 21.315 2.25138L25.5577 6.49402L21.315 10.7367C21.0221 11.0296 21.0221 11.5044 21.315 11.7973C21.6079 12.0902 22.0828 12.0902 22.3757 11.7973L27.1487 7.02435ZM1.11108 7.24402L26.6183 7.24402L26.6183 5.74402L1.11108 5.74402L1.11108 7.24402Z" fill="white"/>
+                    </svg>
+                </a>
+            {%- endif -%}
+        </div>
+    </div>
+</hero-banner>
+
+
+{% schema %}
+    {
+      "name": "Hero banner",
+      "tag": "section",
+      "class": "section section-hero-banner",
+      "disabled_on": {
+        "groups": ["header", "footer"]
+      },
+      "settings": [   
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "m_image",
+                "label": "Mobile image"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "heading",
+                "label": "Heading"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "content",
+                "label": "Text"
+            },
+            {
+                "type": "inline_richtext",
+                "id": "mobile_content",
+                "label": "Mobile text"
+            },
+            {
+                "type": "text",
+                "id": "button_label",
+                "label": "Button label"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button link"
+            },
+            {
+                "type": "select",
+                "id": "desktop_content_position",
+                "options": [
+                    {
+                        "value": "top-left",
+                        "label": "Top left"
+                    },
+                    {
+                        "value": "top-center",
+                        "label": "Top center"
+                    },
+                    {
+                        "value": "top-right",
+                        "label": "Top right"
+                    },
+                    {
+                        "value": "middle-left",
+                        "label": "Middle left"
+                    },
+                    {
+                        "value": "middle-center",
+                        "label": "Middle center"
+                    },
+                    {
+                        "value": "middle-right",
+                        "label": "Middle right"
+                    },
+                    {
+                        "value": "bottom-left",
+                        "label": "Bottom left"
+                    },
+                    {
+                        "value": "bottom-center",
+                        "label": "Bottom center"
+                    },
+                    {
+                        "value": "bottom-right",
+                        "label": "Bottom right"
+                    }
+                ],
+                "default": "middle-center",
+                "label": "Desktop content position"
+            },
+            {
+                "type": "select",
+                "id": "text_aligment",
+                "options": [
+                    {
+                        "value": "left",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "center",
+                        "label": "Center"
+                    },
+                    {
+                        "value": "right",
+                        "label": "Right"
+                    }
+                ],
+                "default": "left",
+                "label": "Text alignment"
+            },
+            {
+                "type": "header",
+                "content": "Content Background style"
+            },
+            {
+                "type": "color",
+                "id": "content_bg_color",
+                "label": "Content bg Color",
+                "default": "#fff"
+            },
+            {
+                "type": "header",
+                "content": "Heading style"
+            },
+            {
+                "type": "range",
+                "id": "d_heading_size",
+                "min": 30,
+                "max": 100,
+                "step": 2,
+                "unit": "px",
+                "label": "Desktop Heading size",
+                "default": 70
+            },
+            {
+                "type": "range",
+                "id": "m_heading_size",
+                "min": 20,
+                "max": 40,
+                "step": 2,
+                "unit": "px",
+                "label": "Mobile Heading size",
+                "default": 30
+            },
+            {
+                "type": "color",
+                "id": "heading_color",
+                "label": "Heading Color",
+                "default": "#121212"
+            },
+            {
+                "type": "header",
+                "content": "Text style"
+            },
+            {
+                "type": "range",
+                "id": "d_text_size",
+                "min": 14,
+                "max": 30,
+                "step": 1,
+                "unit": "px",
+                "label": "Desktop text size",
+                "default": 20
+            },
+            {
+                "type": "range",
+                "id": "m_text_size",
+                "min": 10,
+                "max": 25,
+                "step": 1,
+                "unit": "px",
+                "label": "Mobile text size",
+                "default": 14
+            },
+            {
+                "type": "color",
+                "id": "text_color",
+                "label": "Text Color",
+                "default": "#000"
+            },
+            {
+                "type": "header",
+                "content": "Button style"
+            },
+            {
+                "type": "color",
+                "id": "background_color",
+                "label": "Button background Color",
+                "default": "#000"
+            },
+            {
+                "type": "color",
+                "id": "button_text_color",
+                "label": "Button text Color",
+                "default": "#fff"
+            },
+            {
+                "type": "color",
+                "id": "button_bg_hover_color",
+                "label": "Button background hover Color",
+                "default": "#fff"
+            },
+            {
+                "type": "color",
+                "id": "button_text_hover_color",
+                "label": "Button text hover Color",
+                "default": "#fff"
+            }
+      ],
+      "presets": [
+        {
+          "name": "Hero banner"
+        }
+      ]
+    }
+{% endschema %}

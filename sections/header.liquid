@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -19,6 +20,9 @@
 {%- endif -%}
 
 <style>
+  sticky-header.header-wrapper {
+      display: none;
+  }
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
@@ -100,6 +104,19 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+
+.header_wrapper {
+    --header-content-bg: {{ section.settings.content_bg_color }};
+    --d-text-size: {{ section.settings.d_text_size }}px;
+    --m-text-size: {{ section.settings.m_text_size }}px;
+    --text-color: {{ section.settings.text_color }};
+    --button-bg-color: {{ section.settings.background_color }};
+    --button-text-color: {{ section.settings.button_text_color }};
+    --button-hover-bg-color: {{ section.settings.button_bg_hover_color }};
+    --button-hover-text-color: {{ section.settings.button_text_hover_color }};
+}
+
 {%- endstyle -%}
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -307,12 +324,104 @@
     </div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+{{ 'section-new-header.css' | asset_url | stylesheet_tag }}
+<main-header>
+  <div class="header_wrapper">
+     <div class="header-mobile_drawer">
+       <div class="header_icon-menu">         
+          <span>
+            {% render 'icon-hamburger' %}
+            {% render 'icon-close' %}
+          </span>
+       </div>
+       <div id="mobile-menu-drawer" class="mobile_drawer-wrapper">
+         <div class="header-content">
+            <div class="header-text-content desktop-text">
+              {%- if section.settings.text != blank -%}
+                <p class="header_wrapper--header_text">
+                  <span>{{ section.settings.text | escape }}</span>
+                </p>
+              {% endif %}
+            </div>
+         </div>
+         <div class="header__buttons">
+            {%- if section.settings.button_label != blank -%}
+              <button {% if section.settings.link %} href="{{ section.settings.link }}" {% else %} role="link" aria-disabled="true" {% endif %} class="header_wrapper--button ">
+                {{- section.settings.button_label | escape -}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="12" viewBox="0 0 26 12" fill="none">
+                  <path d="M1.22205 4.80469L0.472046 4.80469L0.472046 6.30469L1.22205 6.30469L1.22205 4.80469ZM25.7524 6.08502C26.0453 5.79213 26.0453 5.31725 25.7524 5.02436L20.9794 0.251388C20.6865 -0.0415053 20.2116 -0.0415053 19.9187 0.251388C19.6259 0.544281 19.6259 1.01916 19.9187 1.31205L24.1614 5.55469L19.9187 9.79733C19.6259 10.0902 19.6259 10.5651 19.9187 10.858C20.2116 11.1509 20.6865 11.1509 20.9794 10.858L25.7524 6.08502ZM1.22205 6.30469L25.222 6.30469L25.222 4.80469L1.22205 4.80469L1.22205 6.30469Z" fill="black"/>
+                </svg>
+              </button>
+            {%- endif -%}
+         </div>
+       </div>
+     </div>
+     <div class="header-logo">
+        <h1 class="header__title">
+          <a href="{{ routes.root_url }}" class="">
+            {%- if section.settings.logo != blank -%}
+              <div class="header__logo-wrapper">
+                 <img class="" src="{{ section.settings.logo | img_url: 'master' }}" alt="Header Logo"  />
+              </div>
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+        </h1>
+      </div>
+     <div class="header-content">
+        <div class="header-text-content desktop-text">
+          {%- if section.settings.text != blank -%}
+            <p class="header_wrapper--header_text">
+              <span>{{ section.settings.text | escape }}</span>
+            </p>
+          {% endif %}
+        </div>
+     </div>
+     <div class="header__buttons">
+        {%- if section.settings.button_label != blank -%}
+          <button {% if section.settings.link %} href="{{ section.settings.link }}" {% else %} role="link" aria-disabled="true" {% endif %} class="header_wrapper--button">
+            {{- section.settings.button_label | escape -}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="12" viewBox="0 0 26 12" fill="none">
+              <path d="M1.22205 4.80469L0.472046 4.80469L0.472046 6.30469L1.22205 6.30469L1.22205 4.80469ZM25.7524 6.08502C26.0453 5.79213 26.0453 5.31725 25.7524 5.02436L20.9794 0.251388C20.6865 -0.0415053 20.2116 -0.0415053 19.9187 0.251388C19.6259 0.544281 19.6259 1.01916 19.9187 1.31205L24.1614 5.55469L19.9187 9.79733C19.6259 10.0902 19.6259 10.5651 19.9187 10.858C20.2116 11.1509 20.6865 11.1509 20.9794 10.858L25.7524 6.08502ZM1.22205 6.30469L25.222 6.30469L25.222 4.80469L1.22205 4.80469L1.22205 6.30469Z" fill="black"/>
+            </svg>
+          </button>
+        {%- endif -%}
+     </div>
+  </div>
 
+</main-header>
+  
+  
 {%- if settings.cart_type == "notification" -%}
   {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
 {%- endif -%}
 
 {% javascript %}
+class MainHeader extends HTMLElement {
+  constructor() {
+    super();
+
+    this.initEventListeners();
+  }
+
+  initEventListeners() {
+      const menuButton = document.querySelector('.header_icon-menu');
+      const menuDrawer = document.querySelector('#mobile-menu-drawer');
+      const mobileDrawer = document.querySelector('.header-mobile_drawer');
+      const body = document.body;
+
+      menuButton.addEventListener('click', () => {
+        menuDrawer.classList.toggle('open');
+        mobileDrawer.classList.toggle('drawer-open');
+        body.classList.toggle('overflow-hidden-tablet');
+      });
+  }
+}
+
+customElements.define('main-header', MainHeader)
+
+  
   class StickyHeader extends HTMLElement {
     constructor() {
       super();
@@ -464,12 +573,104 @@
   </script>
 {%- endif -%}
 
+
 {% schema %}
 {
   "name": "t:sections.header.name",
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
+     {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:settings_schema.logo.settings.logo_image.label"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Header Text",
+      "label": "Header text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "t:sections.slideshow.blocks.slide.settings.button_label.default",
+      "label": "t:sections.slideshow.blocks.slide.settings.button_label.label",
+      "info": "t:sections.slideshow.blocks.slide.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.slideshow.blocks.slide.settings.link.label"
+    },
+     {
+        "type": "header",
+        "content": "Header Background color"
+     },
+     {
+        "type": "color",
+        "id": "content_bg_color",
+        "label": "Header bg Color",
+        "default": "#fff"
+     },
+    {
+        "type": "header",
+        "content": "Text style"
+    },
+    {
+        "type": "range",
+        "id": "d_text_size",
+        "min": 14,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "label": "Desktop text size",
+        "default": 16
+    },
+    {
+        "type": "range",
+        "id": "m_text_size",
+        "min": 10,
+        "max": 25,
+        "step": 1,
+        "unit": "px",
+        "label": "Mobile text size",
+        "default": 16
+    },
+    {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#000"
+    },
+    {
+        "type": "header",
+        "content": "Button style"
+    },
+    {
+        "type": "color",
+        "id": "background_color",
+        "label": "Button background Color",
+        "default": "#FFF544"
+    },
+    {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button text Color",
+        "default": "#000000"
+    },
+    {
+        "type": "color",
+        "id": "button_bg_hover_color",
+        "label": "Button background hover Color",
+        "default": "#000000"
+    },
+    {
+        "type": "color",
+        "id": "button_text_hover_color",
+        "label": "Button text hover Color",
+        "default": "#fff"
+    },
     {
       "type": "select",
       "id": "logo_position",
@@ -645,7 +846,7 @@
       "id": "padding_top",
       "min": 0,
       "max": 36,
-      "step": 4,
+      "step": 1,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
       "default": 20
@@ -655,7 +856,7 @@
       "id": "padding_bottom",
       "min": 0,
       "max": 36,
-      "step": 4,
+      "step": 1,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 20
